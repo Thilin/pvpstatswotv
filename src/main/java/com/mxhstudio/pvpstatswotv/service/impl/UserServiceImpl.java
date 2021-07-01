@@ -13,7 +13,7 @@ import static com.mxhstudio.pvpstatswotv.mapper.UserMapper.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
 
     UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
