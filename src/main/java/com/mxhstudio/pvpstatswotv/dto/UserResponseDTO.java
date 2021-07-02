@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCreateDTO {
+public class UserResponseDTO {
 
     @Schema(description = "User name", example = "Fernando Cauper")
     private String name;
@@ -16,7 +16,4 @@ public class UserCreateDTO {
     private String nickName;
     @Schema(description = "User email", example = "email@email.com")
     private String email;
-    @Schema(description = "User password", example = "123")
-    private String password;
-
 }
