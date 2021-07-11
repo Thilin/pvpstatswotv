@@ -14,4 +14,6 @@ public abstract class ErrorConstants {
      public static final String SUPPORT_ABILITY_NAO_ENCONTRADO = "Support Ability não encontrado.";
      public static final String CHARACTER_JOB_NAO_ENCONTRADO = "Character Job não encontrado.";
      public static final String CHARACTER_BUILT_NAO_ENCONTRADO = "Character Built não encontrado.";
+     public static final String FORMATION_NAO_ENCONTRADO = "Formação não encontrada.";
+     public static final String SEASON_NAO_ENCONTRADO = "Season não encontrada.";
 }
