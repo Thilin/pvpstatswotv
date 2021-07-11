@@ -3,7 +3,7 @@ package com.mxhstudio.pvpstatswotv.service.impl;
 import com.mxhstudio.pvpstatswotv.domain.CharacterBuilt;
 import com.mxhstudio.pvpstatswotv.domain.CharacterBuiltEquipment;
 import com.mxhstudio.pvpstatswotv.dto.CharacterBuiltCreateDTO;
-import com.mxhstudio.pvpstatswotv.exceptions.ErrorConstants;
+import com.mxhstudio.pvpstatswotv.dto.EquipmentBuiltResponseDTO;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
 import com.mxhstudio.pvpstatswotv.repository.CharacterBuiltEquipmentRepository;
 import com.mxhstudio.pvpstatswotv.repository.EquipmentRepository;
@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.mxhstudio.pvpstatswotv.exceptions.ErrorConstants.*;
+import static com.mxhstudio.pvpstatswotv.mapper.EquipmentBuiltMapper.*;
 
 @Service
 public class CharacterBuiltEquipmentServiceImpl implements CharacterBuiltEquipmentService {
@@ -37,5 +41,13 @@ public class CharacterBuiltEquipmentServiceImpl implements CharacterBuiltEquipme
             builtEquipment.setEquipment(equipment);
             characterBuiltEquipmentRepository.save(builtEquipment);
         });
+    }
+
+    @Override
+    public List<EquipmentBuiltResponseDTO> listByCharacterBuiltId(Long id) {
+        List<CharacterBuiltEquipment> equipments = characterBuiltEquipmentRepository.findByCharacterBuiltId(id);
+        return equipments.stream().map(equipment -> {
+            return INSTANCE.convertToDTO(equipment.getEquipment());
+        }).collect(Collectors.toList());
     }
 }

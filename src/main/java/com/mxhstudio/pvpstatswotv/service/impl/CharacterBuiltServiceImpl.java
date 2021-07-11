@@ -3,6 +3,7 @@ package com.mxhstudio.pvpstatswotv.service.impl;
 import com.mxhstudio.pvpstatswotv.domain.*;
 import com.mxhstudio.pvpstatswotv.domain.Character;
 import com.mxhstudio.pvpstatswotv.dto.CharacterBuiltCreateDTO;
+import com.mxhstudio.pvpstatswotv.dto.CharacterBuiltResponseDTO;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
 import com.mxhstudio.pvpstatswotv.repository.*;
 import com.mxhstudio.pvpstatswotv.service.CharacterBuiltEquipmentService;
@@ -13,7 +14,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.mxhstudio.pvpstatswotv.exceptions.ErrorConstants.*;
+import static com.mxhstudio.pvpstatswotv.mapper.CharacterBuiltMapper.*;
 
 @Service
 public class CharacterBuiltServiceImpl implements CharacterBuiltService {
@@ -58,6 +63,16 @@ public class CharacterBuiltServiceImpl implements CharacterBuiltService {
         saveAddtionalInformation(characterBuilt, dto);
 
         return characterBuilt.getId();
+    }
+
+    @Override
+    public List<CharacterBuiltResponseDTO> listAllByUserId(Long id) {
+        List<CharacterBuilt> builts = characterBuiltRepository.findByUserId(id);
+        return builts.stream().map(characterBuilt -> {
+            var dto = INSTANCE.convertToDTO(characterBuilt);
+            dto.setEquipments(characterBuiltEquipmentService.listByCharacterBuiltId(characterBuilt.getId()));
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     private void saveAddtionalInformation(CharacterBuilt characterBuilt, CharacterBuiltCreateDTO dto) {
