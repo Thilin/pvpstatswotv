@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return INSTANCE.convertToDTO(user);
     }
+
+    @Override
+    public User findByUserId(Long userId) {
+        return null;
+    }
 }
