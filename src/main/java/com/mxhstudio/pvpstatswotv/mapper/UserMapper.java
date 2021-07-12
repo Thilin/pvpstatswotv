@@ -3,14 +3,10 @@ package com.mxhstudio.pvpstatswotv.mapper;
 import com.mxhstudio.pvpstatswotv.domain.User;
 import com.mxhstudio.pvpstatswotv.dto.UserCreateDTO;
 import com.mxhstudio.pvpstatswotv.dto.UserResponseDTO;
-import com.mxhstudio.pvpstatswotv.security.SecurityConfig;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public abstract class UserMapper {

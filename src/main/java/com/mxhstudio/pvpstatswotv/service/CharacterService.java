@@ -2,7 +2,6 @@ package com.mxhstudio.pvpstatswotv.service;
 
 import com.mxhstudio.pvpstatswotv.dto.CharacterJobResponseDTO;
 import com.mxhstudio.pvpstatswotv.dto.CharacterResponseDTO;
-import com.mxhstudio.pvpstatswotv.dto.JobResponseDTO;
 
 import java.util.List;
 

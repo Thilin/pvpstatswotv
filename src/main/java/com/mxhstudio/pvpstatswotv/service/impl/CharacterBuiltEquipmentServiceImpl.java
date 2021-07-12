@@ -46,8 +46,6 @@ public class CharacterBuiltEquipmentServiceImpl implements CharacterBuiltEquipme
     @Override
     public List<EquipmentBuiltResponseDTO> listByCharacterBuiltId(Long id) {
         List<CharacterBuiltEquipment> equipments = characterBuiltEquipmentRepository.findByCharacterBuiltId(id);
-        return equipments.stream().map(equipment -> {
-            return INSTANCE.convertToDTO(equipment.getEquipment());
-        }).collect(Collectors.toList());
+        return equipments.stream().map(equipment -> INSTANCE.convertToDTO(equipment.getEquipment())).collect(Collectors.toList());
     }
 }

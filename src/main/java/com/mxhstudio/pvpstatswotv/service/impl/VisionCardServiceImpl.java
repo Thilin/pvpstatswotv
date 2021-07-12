@@ -2,7 +2,6 @@ package com.mxhstudio.pvpstatswotv.service.impl;
 
 import com.mxhstudio.pvpstatswotv.dto.VisionCardResponseDTO;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
-import com.mxhstudio.pvpstatswotv.mapper.VisionCardMapper;
 import com.mxhstudio.pvpstatswotv.repository.VisionCardRepository;
 import com.mxhstudio.pvpstatswotv.service.VisionCardService;
 import org.springframework.stereotype.Service;
