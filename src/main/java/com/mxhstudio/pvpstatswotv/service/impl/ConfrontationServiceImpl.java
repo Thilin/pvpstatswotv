@@ -4,6 +4,7 @@ import com.mxhstudio.pvpstatswotv.domain.*;
 import com.mxhstudio.pvpstatswotv.dto.ConfrontationCreateDTO;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
 import com.mxhstudio.pvpstatswotv.repository.*;
+import com.mxhstudio.pvpstatswotv.service.ConfrontationDetailService;
 import com.mxhstudio.pvpstatswotv.service.ConfrontationService;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +21,20 @@ public class ConfrontationServiceImpl implements ConfrontationService {
     private final ConfrontationCharacterFormationRepository confrontationCharacterFormationRepository;
     private final SeasonRepository seasonRepository;
     private final UserRepository userRepository;
+    private final ConfrontationDetailService confrontationDetailService;
 
     ConfrontationServiceImpl(ConfrontationRepository confrontationRepository, FormationRepository formationRepository,
                              FormationCharacterBuiltRepository formationCharacterBuiltRepository,
                              ConfrontationCharacterFormationRepository confrontationCharacterFormationRepository,
-                             SeasonRepository seasonRepository, UserRepository userRepository){
+                             SeasonRepository seasonRepository, UserRepository userRepository,
+                             ConfrontationDetailService confrontationDetailService){
         this.confrontationRepository = confrontationRepository;
         this.formationRepository = formationRepository;
         this.formationCharacterBuiltRepository = formationCharacterBuiltRepository;
         this.confrontationCharacterFormationRepository = confrontationCharacterFormationRepository;
         this.seasonRepository = seasonRepository;
         this.userRepository = userRepository;
+        this.confrontationDetailService = confrontationDetailService;
     }
 
     @Override
@@ -51,6 +55,7 @@ public class ConfrontationServiceImpl implements ConfrontationService {
         confrontation.setUser(getUser(dto.getUserId()));
 
         confrontationRepository.save(confrontation);
+        confrontationDetailService.save(confrontation);
         return confrontation.getId();
     }
 
