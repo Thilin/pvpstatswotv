@@ -27,7 +27,7 @@ public class UserController {
 
     @PutMapping()
     @Operation(summary = "Create new user", description = "Create a new user")
-    public UserResponseDTO create(@RequestBody UserCreateDTO dto){
+    public Long create(@RequestBody UserCreateDTO dto){
         return userService.create(dto);
     }
 }

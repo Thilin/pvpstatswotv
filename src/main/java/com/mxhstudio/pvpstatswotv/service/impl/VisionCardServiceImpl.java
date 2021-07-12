@@ -17,7 +17,7 @@ public class VisionCardServiceImpl implements VisionCardService {
 
     private final VisionCardRepository visionCardRepository;
 
-    VisionCardServiceImpl(VisionCardRepository visionCardRepository){
+    public VisionCardServiceImpl(VisionCardRepository visionCardRepository){
         this.visionCardRepository = visionCardRepository;
     }
 

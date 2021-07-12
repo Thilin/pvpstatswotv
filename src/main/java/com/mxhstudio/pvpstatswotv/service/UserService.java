@@ -10,7 +10,7 @@ public interface UserService {
 
     List<User> listAll();
 
-    UserResponseDTO create(UserCreateDTO dto);
+    Long create(UserCreateDTO dto);
 
     User findByUserId(Long userId);
 }

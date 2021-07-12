@@ -2,7 +2,6 @@ package com.mxhstudio.pvpstatswotv.service.impl;
 
 import com.mxhstudio.pvpstatswotv.domain.User;
 import com.mxhstudio.pvpstatswotv.dto.UserCreateDTO;
-import com.mxhstudio.pvpstatswotv.dto.UserResponseDTO;
 import com.mxhstudio.pvpstatswotv.repository.UserRepository;
 import com.mxhstudio.pvpstatswotv.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,11 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO create(UserCreateDTO dto) {
+    public Long create(UserCreateDTO dto) {
         final var user = INSTANCE.convertToEntity(dto);
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(user);
-        return INSTANCE.convertToDTO(user);
+        return user.getId();
     }
 
     @Override
