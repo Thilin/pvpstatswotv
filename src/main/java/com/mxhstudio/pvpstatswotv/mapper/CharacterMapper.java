@@ -1,6 +1,8 @@
 package com.mxhstudio.pvpstatswotv.mapper;
 
 import com.mxhstudio.pvpstatswotv.domain.Character;
+import com.mxhstudio.pvpstatswotv.domain.CharacterJob;
+import com.mxhstudio.pvpstatswotv.dto.CharacterJobResponseDTO;
 import com.mxhstudio.pvpstatswotv.dto.CharacterResponseDTO;
 import com.mxhstudio.pvpstatswotv.dto.FormationResumeResponseDTO;
 import org.mapstruct.Mapper;
@@ -14,4 +16,6 @@ public abstract class CharacterMapper {
     public abstract CharacterResponseDTO convertToDTO(Character character);
 
     public abstract FormationResumeResponseDTO convertToResumeDTO(Character character);
+
+    public abstract CharacterJobResponseDTO convertJobsToDTO(CharacterJob characterJob);
 }

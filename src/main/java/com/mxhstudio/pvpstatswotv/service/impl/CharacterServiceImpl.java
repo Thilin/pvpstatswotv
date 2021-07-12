@@ -1,9 +1,9 @@
 package com.mxhstudio.pvpstatswotv.service.impl;
 
+import com.mxhstudio.pvpstatswotv.dto.CharacterJobResponseDTO;
 import com.mxhstudio.pvpstatswotv.dto.CharacterResponseDTO;
-import com.mxhstudio.pvpstatswotv.exceptions.ErrorConstants;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
-import com.mxhstudio.pvpstatswotv.mapper.CharacterMapper;
+import com.mxhstudio.pvpstatswotv.repository.CharacterJobRepository;
 import com.mxhstudio.pvpstatswotv.repository.CharacterRepository;
 import com.mxhstudio.pvpstatswotv.service.CharacterService;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,11 @@ import static com.mxhstudio.pvpstatswotv.mapper.CharacterMapper.*;
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepository characterRepository;
+    private final CharacterJobRepository characterJobRepository;
 
-    CharacterServiceImpl(CharacterRepository characterRepository){
+    CharacterServiceImpl(CharacterRepository characterRepository, CharacterJobRepository characterJobRepository){
         this.characterRepository = characterRepository;
+        this.characterJobRepository = characterJobRepository;
     }
 
     @Override
@@ -33,5 +35,11 @@ public class CharacterServiceImpl implements CharacterService {
     public List<CharacterResponseDTO> listAll() {
         var characters = characterRepository.findAll();
         return characters.stream().map(INSTANCE::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CharacterJobResponseDTO> listAllJobsByCharacterId(Long id) {
+        var characterJobs = characterJobRepository.findByCharacterId(id);
+        return characterJobs.stream().map(INSTANCE::convertJobsToDTO).collect(Collectors.toList());
     }
 }

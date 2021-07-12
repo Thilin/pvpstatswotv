@@ -1,5 +1,6 @@
 package com.mxhstudio.pvpstatswotv.controller;
 
+import com.mxhstudio.pvpstatswotv.dto.CharacterJobResponseDTO;
 import com.mxhstudio.pvpstatswotv.dto.CharacterResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.CharacterService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,5 +28,10 @@ public class CharacterController {
     @GetMapping(value = "/all")
     public List<CharacterResponseDTO> listAll(){
         return characterService.listAll();
+    }
+
+    @GetMapping(value = "/{id}/jobs")
+    public List<CharacterJobResponseDTO> listAllJobsByCharacterId(@PathVariable Long id){
+        return characterService.listAllJobsByCharacterId(id);
     }
 }
