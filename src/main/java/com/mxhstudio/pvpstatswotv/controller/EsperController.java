@@ -2,6 +2,9 @@ package com.mxhstudio.pvpstatswotv.controller;
 
 import com.mxhstudio.pvpstatswotv.dto.EsperResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.EsperService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +22,18 @@ public class EsperController {
         this.esperService = esperService;
     }
 
-    @GetMapping(value = "/{id}")
-    public EsperResponseDTO findById(@PathVariable Long id){
-        return esperService.findById(id);
+    @GetMapping(value = "/{id}", produces = "application/json")
+    @Operation(summary = "find esper", description = "Find an Esper using its id")
+    public ResponseEntity<EsperResponseDTO> findById(@PathVariable Long id){
+        var dto = esperService.findById(id);
+        if(dto == null)
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping(value = "/all")
-    public List<EsperResponseDTO> listAll(){
-        return esperService.showAll();
+    @GetMapping(value = "/all", produces = "application/json")
+    @Operation(summary = "list all espers", description = "List all espers with their infos")
+    public ResponseEntity<List<EsperResponseDTO>> listAll(){
+        return ResponseEntity.ok().body(esperService.showAll());
     }
 }
