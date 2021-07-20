@@ -1,5 +1,6 @@
 package com.mxhstudio.pvpstatswotv.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EquipmentTypeResponseDTO {
 
+    @Schema(description = "Equipment type id", example = "1")
     private Long id;
+    @Schema(description = "Equipment type description", example = "Weapon")
     private String description;
 }
