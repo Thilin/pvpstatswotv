@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PutMapping()
+    @PutMapping(consumes = "application/json")
     @Operation(summary = "Create new user", description = "Create a new user")
     public ResponseEntity<Void> create(@RequestBody UserCreateDTO dto){
         long id = userService.create(dto);
