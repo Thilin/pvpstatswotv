@@ -28,8 +28,9 @@ public class CharacterBuilderController {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping(value = "/{userId}")
-    public List<CharacterBuiltResponseDTO> listAllByUserId(@PathVariable Long userId){
-        return characterBuiltService.listAllByUserId(userId);
+    @GetMapping(value = "/{userId}", produces = "application/json")
+    @Operation(summary = "List all user builds", description = "List all user builds based on its id")
+    public ResponseEntity<List<CharacterBuiltResponseDTO>> listAllByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok().body(characterBuiltService.listAllByUserId(userId));
     }
 }
