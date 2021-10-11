@@ -4,6 +4,7 @@ import com.mxhstudio.pvpstatswotv.dto.CharacterFormationCreateDTO;
 import com.mxhstudio.pvpstatswotv.dto.FormationResumeResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.FormationService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/formations")
+@SecurityRequirement(name = "/v3/api-docs")
 public class FormationController {
 
     private final FormationService formationService;

@@ -5,6 +5,7 @@ import com.mxhstudio.pvpstatswotv.dto.UserCreateDTO;
 import com.mxhstudio.pvpstatswotv.dto.UserResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
+@SecurityRequirement(name = "/v3/api-docs")
 public class UserController {
 
     private final UserService userService;

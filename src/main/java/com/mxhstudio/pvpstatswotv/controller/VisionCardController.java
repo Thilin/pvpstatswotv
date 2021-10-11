@@ -3,6 +3,7 @@ package com.mxhstudio.pvpstatswotv.controller;
 import com.mxhstudio.pvpstatswotv.dto.VisionCardResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.VisionCardService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/visioncards")
+@SecurityRequirement(name = "/v3/api-docs")
 public class VisionCardController {
 
     private final VisionCardService visionCardService;

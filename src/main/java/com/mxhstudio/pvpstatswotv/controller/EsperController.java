@@ -3,7 +3,7 @@ package com.mxhstudio.pvpstatswotv.controller;
 import com.mxhstudio.pvpstatswotv.dto.EsperResponseDTO;
 import com.mxhstudio.pvpstatswotv.service.EsperService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.apache.coyote.Response;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/espers")
+@SecurityRequirement(name = "/v3/api-docs")
 public class EsperController {
 
     private final EsperService esperService;
