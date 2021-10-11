@@ -2,6 +2,9 @@ package com.mxhstudio.pvpstatswotv.service.impl;
 
 import com.mxhstudio.pvpstatswotv.domain.*;
 import com.mxhstudio.pvpstatswotv.dto.ConfrontationCreateDTO;
+import com.mxhstudio.pvpstatswotv.dto.UsedFormationResponseDTO;
+import com.mxhstudio.pvpstatswotv.dto.WinFormationDTO;
+import com.mxhstudio.pvpstatswotv.dto.WinrateFormationResponseDTO;
 import com.mxhstudio.pvpstatswotv.exceptions.ObjectNotFoundException;
 import com.mxhstudio.pvpstatswotv.repository.*;
 import com.mxhstudio.pvpstatswotv.service.ConfrontationDetailService;
@@ -9,6 +12,8 @@ import com.mxhstudio.pvpstatswotv.service.ConfrontationService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.util.*;
 
 import static com.mxhstudio.pvpstatswotv.exceptions.ErrorConstants.*;
 
@@ -46,9 +51,7 @@ public class ConfrontationServiceImpl implements ConfrontationService {
         var confrontationCharacterFormation = getConfrontationCharacterFormation(formation);
 
         confrontation.setDate(dto.getDate());
-        confrontation.setUnitsDefeated(dto.getUnitsDefeated());
-        confrontation.setUnitsLost(dto.getUnitsLost());
-        confrontation.setWin(dto.getUnitsDefeated() == 3);
+        confrontation.setWin(dto.isWin());
         confrontation.setConfrontationCharacterFormation(confrontationCharacterFormation);
         confrontation.setFormation(formation);
         confrontation.setSeason(getSeason(dto.getSeasonId()));
@@ -57,6 +60,32 @@ public class ConfrontationServiceImpl implements ConfrontationService {
         confrontationRepository.save(confrontation);
         confrontationDetailService.save(confrontation);
         return confrontation.getId();
+    }
+
+    @Override
+    public List<UsedFormationResponseDTO> findMostUsedFormationsByPvPTypeAndSeason(Long pvpTypeId, Long seasonId) {
+        return confrontationRepository.findMostUsedFormationsBySeasonId(seasonId);
+    }
+
+    @Override
+    public Object findFormationsWithBestWinrateBySeason(Long seasonId) {
+        List<WinFormationDTO> winFormationDTOS = confrontationRepository.countAllWinFormations();
+        List<WinrateFormationResponseDTO> winrateFormations = new ArrayList<>();
+
+        winFormationDTOS.forEach(winFormationDTO -> {
+            WinrateFormationResponseDTO dto = new WinrateFormationResponseDTO();
+            Long totalMatches = confrontationRepository.countByConfrontationCharacterFormationId(winFormationDTO.getCcfId());
+            Double winrate = (double) winFormationDTO.getWinCount()/totalMatches;
+            dto.setCharacter1(winFormationDTO.getCharacter1());
+            dto.setCharacter2(winFormationDTO.getCharacter2());
+            dto.setCharacter3(winFormationDTO.getCharacter3());
+            dto.setWinrate(winrate*100);
+            winrateFormations.add(dto);
+        });
+
+        Collections.sort(winrateFormations, Comparator.comparing(WinrateFormationResponseDTO::getWinrate).reversed());
+
+        return winrateFormations;
     }
 
     private User getUser(Long userId) {

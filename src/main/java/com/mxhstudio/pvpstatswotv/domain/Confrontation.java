@@ -22,15 +22,9 @@ public class Confrontation {
     @Column(name = "CON_DATE")
     private LocalDate date;
 
-    @Column(name = "CON_LOSSES")
-    private Long unitsLost;
-
     @OneToOne
     @JoinColumn(name = "CON_FMT_ID", referencedColumnName = "FMT_ID")
     private Formation formation;
-
-    @Column(name = "CON_DEFEATS")
-    private Long unitsDefeated;
 
     @Column(name = "CON_ISWIN")
     private boolean isWin;
