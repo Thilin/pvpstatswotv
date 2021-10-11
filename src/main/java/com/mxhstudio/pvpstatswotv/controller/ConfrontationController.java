@@ -32,8 +32,8 @@ public class ConfrontationController {
 
     @GetMapping(value = "/mostUsedFormation", produces = "application/json")
     @Operation(summary = "Show formations", description = "Show all most used formations by pvpType and season")
-    public ResponseEntity<List<UsedFormationResponseDTO>> listMostUsedFormationByPvPTypeAndSeason(@RequestParam Long pvpTypeId, @RequestParam Long seasonId){
-        var formations =  confrontationService.findMostUsedFormationsByPvPTypeAndSeason(pvpTypeId, seasonId);
+    public ResponseEntity<List<UsedFormationResponseDTO>> listMostUsedFormationByPvPTypeAndSeason( @RequestParam Long seasonId){
+        var formations =  confrontationService.findMostUsedFormationsByPvPTypeAndSeason(seasonId);
         return ResponseEntity.ok().body(formations);
     }
 

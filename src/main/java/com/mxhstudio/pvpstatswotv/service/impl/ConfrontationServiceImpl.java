@@ -63,7 +63,7 @@ public class ConfrontationServiceImpl implements ConfrontationService {
     }
 
     @Override
-    public List<UsedFormationResponseDTO> findMostUsedFormationsByPvPTypeAndSeason(Long pvpTypeId, Long seasonId) {
+    public List<UsedFormationResponseDTO> findMostUsedFormationsByPvPTypeAndSeason(Long seasonId) {
         return confrontationRepository.findMostUsedFormationsBySeasonId(seasonId);
     }
 
