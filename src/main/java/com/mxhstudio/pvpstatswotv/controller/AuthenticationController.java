@@ -3,6 +3,7 @@ package com.mxhstudio.pvpstatswotv.controller;
 import com.mxhstudio.pvpstatswotv.dto.LoginDTO;
 import com.mxhstudio.pvpstatswotv.dto.TokenDTO;
 import com.mxhstudio.pvpstatswotv.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping(consumes = "application/json")
+    @Operation(summary = "Authenticate user", description = "Authenticate the user with email and password")
     public ResponseEntity<TokenDTO> authenticate(@RequestBody @Valid LoginDTO dto){
         UsernamePasswordAuthenticationToken dadosLogin = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
         var authentication = authManager.authenticate(dadosLogin);
